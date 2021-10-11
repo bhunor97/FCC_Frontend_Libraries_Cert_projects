@@ -28,13 +28,10 @@ export default function Body() {
         <button onClick={getQuote} id="new-quote">
           Get a new quote
         </button>
-        <a href="#" id="tweet-quote">
+        <a href="twitter.com/intent/tweet" target="_blank" id="tweet-quote">
           Tweet quote
         </a>
       </section>
     </div>
   );
 }
-
-// User Story #6:
-// User Story #7:
