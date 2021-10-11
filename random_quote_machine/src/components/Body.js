@@ -23,14 +23,23 @@ export default function Body() {
   return (
     <div>
       <section id="quote-box">
+        <i class="fas fa-quote-left"></i>
         <div id="text">{currentQuote.text}</div>
-        <div id="author">{currentQuote.author}</div>
-        <button onClick={getQuote} id="new-quote">
-          Get a new quote
-        </button>
-        <a href="twitter.com/intent/tweet" target="_blank" id="tweet-quote">
-          Tweet quote
-        </a>
+        <div id="author">- {currentQuote.author}</div>
+        <div className="buttons-div">
+          <div className="socials">
+            <a href="twitter.com/intent/tweet" target="_blank" id="tweet-quote">
+              <i id="twitter" className="fab fa-twitter-square"></i>
+            </a>
+            <a href="facebook.com" target="_blank">
+              <i id="facebook" className="fab fa-facebook-square"></i>
+            </a>
+          </div>
+
+          <button onClick={getQuote} id="new-quote">
+            New Quote
+          </button>
+        </div>
       </section>
     </div>
   );
