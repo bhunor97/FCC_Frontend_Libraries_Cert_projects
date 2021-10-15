@@ -89,7 +89,7 @@ button:active {
 .fab {
   padding: 0.5rem;
   font-size: 3.5em;
-  color: blue;
+  color: #fff;
   transition: 0.3s ease;
 }
 
