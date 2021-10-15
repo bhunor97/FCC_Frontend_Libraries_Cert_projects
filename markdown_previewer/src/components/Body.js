@@ -1,5 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import marked from "marked";
 
 const Body = () => {
   const [currentText, setText] = useState("");
@@ -7,6 +8,13 @@ const Body = () => {
   const textUpdateFunc = (event) => {
     setText(event.target.value);
   };
+
+  const markedText = marked(
+    "~~This text is strike through~~ __This is also bold__ _This is also italic_"
+  );
+  console.log(typeof markedText);
+
+  const testDiv = document.getElementById("testDiv");
 
   return (
     <div>
@@ -18,14 +26,16 @@ const Body = () => {
           name=""
           cols="30"
           rows="10"
-          placeholder="Text Area Right Here"
+          placeholder="Text Area Right Here asd"
         ></textarea>
       </section>
       {/* Preview */}
       <section className="preview-section">
-        <div id="preview" className="preview">
-          {currentText}
-        </div>
+        <div
+          id="preview"
+          className="preview"
+          dangerouslySetInnerHTML={{ __html: marked(currentText) }}
+        ></div>
       </section>
     </div>
   );
