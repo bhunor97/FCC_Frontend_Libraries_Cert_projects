@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import style from "../style/style.css";
-import resetes from "../style/resets.css";
+import resets from "../style/resets.css";
 
 export default function Body() {
   const [currentQuote, setQuote] = useState("");
