@@ -9,13 +9,6 @@ const Body = () => {
     setText(event.target.value);
   };
 
-  const markedText = marked(
-    "~~This text is strike through~~ __This is also bold__ _This is also italic_"
-  );
-  console.log(typeof markedText);
-
-  const testDiv = document.getElementById("testDiv");
-
   return (
     <div>
       {/* Editor */}
