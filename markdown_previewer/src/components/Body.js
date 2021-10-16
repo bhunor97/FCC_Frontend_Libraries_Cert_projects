@@ -11,6 +11,7 @@ const Body = () => {
     setText(event.target.value);
   };
 
+  // Markdown content
   let plcHolder = ` 
   # Largest Heading
   ## Second Largest
@@ -38,7 +39,6 @@ const Body = () => {
 
   ~~This text is strike through~~
 
-
   > This is a quote
 
   * item 1
@@ -61,28 +61,27 @@ const Body = () => {
 
   return (
     <div className="container">
-      <h1>Markdown Previewer</h1>
+      <div className="title-div">
+        <h1>Markdown Previewer</h1>
+      </div>
+
       {/* Editor */}
       <section className="editor-section">
-        <h2>Editor</h2>
-        <textarea
-          onChange={textUpdateFunc}
-          id="editor"
-          name=""
-          cols="30"
-          rows="10"
-        >
+        <h2 className="h2-titles">Editor</h2>
+        <textarea onChange={textUpdateFunc} id="editor" name="">
           {plcHolder}
         </textarea>
       </section>
       {/* Preview */}
       <section className="preview-section">
-        <h2>Previewer</h2>
-        <div
-          id="preview"
-          className="preview"
-          dangerouslySetInnerHTML={{ __html: marked(currentText) }}
-        ></div>
+        <h2 className="h2-titles">Previewer</h2>
+        <div className="preview-container">
+          <div
+            id="preview"
+            className="preview"
+            dangerouslySetInnerHTML={{ __html: marked(currentText) }}
+          ></div>
+        </div>
       </section>
     </div>
   );
