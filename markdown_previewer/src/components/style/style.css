@@ -19,6 +19,7 @@ body {
   background-color: #fff;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 2.5rem;
   width: 700px;
   padding: 1em;
   background-color: var(--color2);
