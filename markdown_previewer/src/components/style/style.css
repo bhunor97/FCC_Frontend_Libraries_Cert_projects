@@ -25,6 +25,7 @@ body {
 }
 
 .title-div h1 {
+  text-align: center;
   color: #000;
 }
 
@@ -54,6 +55,8 @@ textarea:focus {
 img[alt="random_picture"] {
   width: 250px;
   width: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .preview-container {
@@ -73,10 +76,36 @@ img[alt="random_picture"] {
   align-self: flex-start;
 } */
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 800px) {
+  .title-div,
+  .sub-title-div,
   textarea,
-  .preview-container,
-  .title-div {
-    width: 70%;
+  .preview-container {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .title-div,
+  .sub-title-div,
+  textarea,
+  .preview-container {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .title-div,
+  .sub-title-div,
+  textarea,
+  .preview-container {
+    width: 250px;
+  }
+  .preview-container {
+    font-size: 15px;
+  }
+  img[alt="random_picture"] {
+    width: 150px;
+    width: 150px;
   }
 }
