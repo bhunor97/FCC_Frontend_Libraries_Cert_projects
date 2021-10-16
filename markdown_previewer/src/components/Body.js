@@ -77,7 +77,7 @@ const Body = () => {
         {/* Preview */}
         <section className="preview-section">
           <div className="sub-title-div">
-            <h2 className="h2-titles">Previewer</h2>
+            <h2 className="h2-titles">Preview</h2>
           </div>
           <div className="preview-container">
             <div
