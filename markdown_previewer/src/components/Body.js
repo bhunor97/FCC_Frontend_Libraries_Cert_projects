@@ -64,25 +64,30 @@ const Body = () => {
       <div className="title-div">
         <h1>Markdown Previewer</h1>
       </div>
-
-      {/* Editor */}
-      <section className="editor-section">
-        <h2 className="h2-titles">Editor</h2>
-        <textarea onChange={textUpdateFunc} id="editor" name="">
-          {plcHolder}
-        </textarea>
-      </section>
-      {/* Preview */}
-      <section className="preview-section">
-        <h2 className="h2-titles">Previewer</h2>
-        <div className="preview-container">
-          <div
-            id="preview"
-            className="preview"
-            dangerouslySetInnerHTML={{ __html: marked(currentText) }}
-          ></div>
-        </div>
-      </section>
+      <div className="editor-prew-container">
+        {/* Editor */}
+        <section className="editor-section">
+          <div className="sub-title-div">
+            <h2 className="h2-titles">Editor</h2>
+          </div>
+          <textarea onChange={textUpdateFunc} id="editor" name="">
+            {plcHolder}
+          </textarea>
+        </section>
+        {/* Preview */}
+        <section className="preview-section">
+          <div className="sub-title-div">
+            <h2 className="h2-titles">Previewer</h2>
+          </div>
+          <div className="preview-container">
+            <div
+              id="preview"
+              className="preview"
+              dangerouslySetInnerHTML={{ __html: marked(currentText) }}
+            ></div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };
