@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import marked from "marked";
 import style from "./style/style.css";
+import resets from "./style/resets.css";
 
 const Body = () => {
   const [currentText, setText] = useState("");
@@ -41,9 +42,10 @@ const Body = () => {
   > This is a quote
 
   * item 1
-* item 2
-* item 3
-* item 4
+  * item 2
+  * item 3
+  * item 4
+  
     * nested item 1
     * nested item 2
     * nested item 3
@@ -58,9 +60,11 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
+      <h1>Markdown Previewer</h1>
       {/* Editor */}
       <section className="editor-section">
+        <h2>Editor</h2>
         <textarea
           onChange={textUpdateFunc}
           id="editor"
@@ -73,6 +77,7 @@ const Body = () => {
       </section>
       {/* Preview */}
       <section className="preview-section">
+        <h2>Previewer</h2>
         <div
           id="preview"
           className="preview"

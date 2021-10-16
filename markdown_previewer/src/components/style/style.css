@@ -1,3 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+textarea {
+  width: 700px;
+  height: 700px;
+  padding: 1.5em;
+  resize: vertical;
+}
+
 img[alt="random_picture"] {
   width: 250px;
   width: 250px;
