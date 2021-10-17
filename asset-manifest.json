@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/FCC_Frontend_Libraries_Cert_projects/static/css/main.872f43c5.chunk.css",
+    "main.js": "/FCC_Frontend_Libraries_Cert_projects/static/js/main.9a1b7737.chunk.js",
+    "main.js.map": "/FCC_Frontend_Libraries_Cert_projects/static/js/main.9a1b7737.chunk.js.map",
+    "runtime-main.js": "/FCC_Frontend_Libraries_Cert_projects/static/js/runtime-main.dce11876.js",
+    "runtime-main.js.map": "/FCC_Frontend_Libraries_Cert_projects/static/js/runtime-main.dce11876.js.map",
+    "static/js/2.1b2d1908.chunk.js": "/FCC_Frontend_Libraries_Cert_projects/static/js/2.1b2d1908.chunk.js",
+    "static/js/2.1b2d1908.chunk.js.map": "/FCC_Frontend_Libraries_Cert_projects/static/js/2.1b2d1908.chunk.js.map",
+    "index.html": "/FCC_Frontend_Libraries_Cert_projects/index.html",
+    "static/css/main.872f43c5.chunk.css.map": "/FCC_Frontend_Libraries_Cert_projects/static/css/main.872f43c5.chunk.css.map",
+    "static/js/2.1b2d1908.chunk.js.LICENSE.txt": "/FCC_Frontend_Libraries_Cert_projects/static/js/2.1b2d1908.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dce11876.js",
+    "static/js/2.1b2d1908.chunk.js",
+    "static/css/main.872f43c5.chunk.css",
+    "static/js/main.9a1b7737.chunk.js"
+  ]
+}
