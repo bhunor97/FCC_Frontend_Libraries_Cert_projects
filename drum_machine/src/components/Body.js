@@ -20,7 +20,12 @@ const Body = () => {
         {/* clap_1 */}
         <div
           onClick={() => {
-            document.getElementById("Q").play();
+            let clap_1 = document.getElementById("Q");
+            if (clap_1.paused) {
+              clap_1.play();
+            } else {
+              clap_1.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="clap_1"
@@ -33,7 +38,12 @@ const Body = () => {
         {/* clap_2 */}
         <div
           onClick={() => {
-            document.getElementById("W").play();
+            let clap_2 = document.getElementById("W");
+            if (clap_2.paused) {
+              clap_2.play();
+            } else {
+              clap_2.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="clap_2"
@@ -46,7 +56,12 @@ const Body = () => {
         {/* hat_1 */}
         <div
           onClick={() => {
-            document.getElementById("E").play();
+            let hat_1 = document.getElementById("E");
+            if (hat_1.paused) {
+              hat_1.play();
+            } else {
+              hat_1.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="hat_1"
@@ -59,7 +74,12 @@ const Body = () => {
         {/* hat_2 */}
         <div
           onClick={() => {
-            document.getElementById("A").play();
+            let hat_2 = document.getElementById("A");
+            if (hat_2.paused) {
+              hat_2.play();
+            } else {
+              hat_2.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="hat_2"
@@ -72,26 +92,30 @@ const Body = () => {
         {/* bass */}
         <div
           onClick={() => {
-            document.getElementById("S").play();
+            let bass = document.getElementById("S");
+            if (bass.paused) {
+              bass.play();
+            } else {
+              bass.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="bass"
         >
           S
-          <audio
-            id="S"
-            className="clip"
-            src={bass}
-            type="audio/ogg"
-            preload="auto"
-          >
+          <audio id="S" className="clip" src={bass} type="audio/ogg">
             Your browser does not support the audio element.
           </audio>
         </div>
         {/* kick_1 */}
         <div
           onClick={() => {
-            document.getElementById("D").play();
+            let kick_1 = document.getElementById("D");
+            if (kick_1.paused) {
+              kick_1.play();
+            } else {
+              kick_1.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="kick_1"
@@ -104,7 +128,12 @@ const Body = () => {
         {/* kick_2 */}
         <div
           onClick={() => {
-            document.getElementById("Z").play();
+            let kick_2 = document.getElementById("Z");
+            if (kick_2.paused) {
+              kick_2.play();
+            } else {
+              kick_2.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="kick_2"
@@ -117,7 +146,12 @@ const Body = () => {
         {/* kick_3 */}
         <div
           onClick={() => {
-            document.getElementById("X").play();
+            let kick_3 = document.getElementById("X");
+            if (kick_3.paused) {
+              kick_3.play();
+            } else {
+              kick_3.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="kick_3"
@@ -130,7 +164,12 @@ const Body = () => {
         {/* snare_1 */}
         <div
           onClick={() => {
-            document.getElementById("C").play();
+            let snare_1 = document.getElementById("C");
+            if (snare_1.paused) {
+              snare_1.play();
+            } else {
+              snare_1.currentTime = 0;
+            }
           }}
           className="drum-pad"
           id="snare_1"
