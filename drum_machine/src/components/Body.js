@@ -12,6 +12,13 @@ import kick_3 from "../audio/Kick-short-3.wav";
 import snare_1 from "../audio/Snare-1-short.wav";
 
 const Body = () => {
+  // document.addEventListener("keydown", (e) => {
+  //   if (e.key === "q") {
+  //     let clap_one = document.getElementById("Q");
+  //     clap_one.play();
+  //   }
+  // });
+
   return (
     <div id="drum-machine">
       <div id="display">Display Here</div>
@@ -27,6 +34,7 @@ const Body = () => {
               clap_1.currentTime = 0;
             }
           }}
+          onKeyPress={document}
           className="drum-pad"
           id="clap_1"
         >
