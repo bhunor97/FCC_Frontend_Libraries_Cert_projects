@@ -23,81 +23,99 @@ const Body = () => {
   const kickTwoRef = useRef();
   const kickThreeRef = useRef();
   const snareOneRef = useRef();
+  const dispRef = useRef();
 
   useEffect(() => {
     // keypress
-
     document.addEventListener("keydown", (e) => {
       // clapOneRef
       if (e.key === "q") {
         if (clapOneRef.current.paused) {
           clapOneRef.current.play();
+          dispRef.current.innerText = "clap_1";
         } else {
           clapOneRef.current.currentTime = 0;
+          dispRef.current.innerText = "clap_1";
         }
       }
       // clapTwoRef
       if (e.key === "w") {
         if (clapTwoRef.current.paused) {
           clapTwoRef.current.play();
+          dispRef.current.innerText = "clap_2";
         } else {
           clapTwoRef.current.currentTime = 0;
+          dispRef.current.innerText = "clap_2";
         }
       }
       // hatOneRef
       if (e.key === "e") {
         if (hatOneRef.current.paused) {
           hatOneRef.current.play();
+          dispRef.current.innerText = "hihat_1";
         } else {
           hatOneRef.current.currentTime = 0;
+          dispRef.current.innerText = "hihat_1";
         }
       }
       // hatTwoRef
       if (e.key === "a") {
         if (hatTwoRef.current.paused) {
           hatTwoRef.current.play();
+          dispRef.current.innerText = "hihat_2";
         } else {
           hatTwoRef.current.currentTime = 0;
+          dispRef.current.innerText = "hihat_2";
         }
       }
       // bassOneRef
       if (e.key === "s") {
         if (bassOneRef.current.paused) {
           bassOneRef.current.play();
+          dispRef.current.innerText = "808";
         } else {
           bassOneRef.current.currentTime = 0;
+          dispRef.current.innerText = "808";
         }
       }
       // kickOneRef
       if (e.key === "d") {
         if (kickOneRef.current.paused) {
           kickOneRef.current.play();
+          dispRef.current.innerText = "kick_1";
         } else {
           kickOneRef.current.currentTime = 0;
+          dispRef.current.innerText = "kick_1";
         }
       }
       // kickTwoRef
       if (e.key === "z") {
         if (kickTwoRef.current.paused) {
           kickTwoRef.current.play();
+          dispRef.current.innerText = "kick_1";
         } else {
           kickTwoRef.current.currentTime = 0;
+          dispRef.current.innerText = "kick_2";
         }
       }
       // kickThreeRef
       if (e.key === "x") {
         if (kickThreeRef.current.paused) {
           kickThreeRef.current.play();
+          dispRef.current.innerText = "kick_3";
         } else {
           kickThreeRef.current.currentTime = 0;
+          dispRef.current.innerText = "kick_3";
         }
       }
       // snareOneRef
       if (e.key === "c") {
         if (snareOneRef.current.paused) {
           snareOneRef.current.play();
+          dispRef.current.innerText = "snare";
         } else {
           snareOneRef.current.currentTime = 0;
+          dispRef.current.innerText = "snare";
         }
       }
     });
@@ -105,7 +123,9 @@ const Body = () => {
 
   return (
     <div id="drum-machine">
-      <div id="display">Display Here</div>
+      <div ref={dispRef} id="display">
+        Display Here
+      </div>
       {/* Buttons: start */}
       <section className="drum-pad-section">
         {/* clap_1 */}
@@ -114,8 +134,10 @@ const Body = () => {
             let clap_1 = document.getElementById("Q");
             if (clap_1.paused) {
               clap_1.play();
+              dispRef.current.innerText = "clap_1";
             } else {
               clap_1.currentTime = 0;
+              dispRef.current.innerText = "clap_1";
             }
           }}
           onKeyPress={document}
@@ -139,8 +161,10 @@ const Body = () => {
             let clap_2 = document.getElementById("W");
             if (clap_2.paused) {
               clap_2.play();
+              dispRef.current.innerText = "clap_2";
             } else {
               clap_2.currentTime = 0;
+              dispRef.current.innerText = "clap_2";
             }
           }}
           className="drum-pad"
@@ -163,8 +187,10 @@ const Body = () => {
             let hat_1 = document.getElementById("E");
             if (hat_1.paused) {
               hat_1.play();
+              dispRef.current.innerText = "hat_1";
             } else {
               hat_1.currentTime = 0;
+              dispRef.current.innerText = "hat_1";
             }
           }}
           className="drum-pad"
@@ -187,8 +213,10 @@ const Body = () => {
             let hat_2 = document.getElementById("A");
             if (hat_2.paused) {
               hat_2.play();
+              dispRef.current.innerText = "hat_2";
             } else {
               hat_2.currentTime = 0;
+              dispRef.current.innerText = "hat_2";
             }
           }}
           className="drum-pad"
@@ -211,8 +239,10 @@ const Body = () => {
             let bass = document.getElementById("S");
             if (bass.paused) {
               bass.play();
+              dispRef.current.innerText = "808";
             } else {
               bass.currentTime = 0;
+              dispRef.current.innerText = "808";
             }
           }}
           className="drum-pad"
@@ -235,8 +265,10 @@ const Body = () => {
             let kick_1 = document.getElementById("D");
             if (kick_1.paused) {
               kick_1.play();
+              dispRef.current.innerText = "kick_1";
             } else {
               kick_1.currentTime = 0;
+              dispRef.current.innerText = "kick_1";
             }
           }}
           className="drum-pad"
@@ -259,8 +291,10 @@ const Body = () => {
             let kick_2 = document.getElementById("Z");
             if (kick_2.paused) {
               kick_2.play();
+              dispRef.current.innerText = "kick_2";
             } else {
               kick_2.currentTime = 0;
+              dispRef.current.innerText = "kick_2";
             }
           }}
           className="drum-pad"
@@ -283,8 +317,10 @@ const Body = () => {
             let kick_3 = document.getElementById("X");
             if (kick_3.paused) {
               kick_3.play();
+              dispRef.current.innerText = "kick_3";
             } else {
               kick_3.currentTime = 0;
+              dispRef.current.innerText = "kick_3";
             }
           }}
           className="drum-pad"
@@ -307,8 +343,10 @@ const Body = () => {
             let snare_1 = document.getElementById("C");
             if (snare_1.paused) {
               snare_1.play();
+              dispRef.current.innerText = "snare";
             } else {
               snare_1.currentTime = 0;
+              dispRef.current.innerText = "snare";
             }
           }}
           className="drum-pad"
