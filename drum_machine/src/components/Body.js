@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef, useEffect } from "react";
 import "../style/style.css";
 import "../style/resets.css";
 import clap_1 from "../audio/Clap-1-short.wav";
@@ -12,12 +13,95 @@ import kick_3 from "../audio/Kick-short-3.wav";
 import snare_1 from "../audio/Snare-1-short.wav";
 
 const Body = () => {
-  // document.addEventListener("keydown", (e) => {
-  //   if (e.key === "q") {
-  //     let clap_one = document.getElementById("Q");
-  //     clap_one.play();
-  //   }
-  // });
+  // refs
+  const clapOneRef = useRef();
+  const clapTwoRef = useRef();
+  const hatOneRef = useRef();
+  const hatTwoRef = useRef();
+  const bassOneRef = useRef();
+  const kickOneRef = useRef();
+  const kickTwoRef = useRef();
+  const kickThreeRef = useRef();
+  const snareOneRef = useRef();
+
+  useEffect(() => {
+    // keypress
+
+    document.addEventListener("keydown", (e) => {
+      // clapOneRef
+      if (e.key === "q") {
+        if (clapOneRef.current.paused) {
+          clapOneRef.current.play();
+        } else {
+          clapOneRef.current.currentTime = 0;
+        }
+      }
+      // clapTwoRef
+      if (e.key === "w") {
+        if (clapTwoRef.current.paused) {
+          clapTwoRef.current.play();
+        } else {
+          clapTwoRef.current.currentTime = 0;
+        }
+      }
+      // hatOneRef
+      if (e.key === "e") {
+        if (hatOneRef.current.paused) {
+          hatOneRef.current.play();
+        } else {
+          hatOneRef.current.currentTime = 0;
+        }
+      }
+      // hatTwoRef
+      if (e.key === "a") {
+        if (hatTwoRef.current.paused) {
+          hatTwoRef.current.play();
+        } else {
+          hatTwoRef.current.currentTime = 0;
+        }
+      }
+      // bassOneRef
+      if (e.key === "s") {
+        if (bassOneRef.current.paused) {
+          bassOneRef.current.play();
+        } else {
+          bassOneRef.current.currentTime = 0;
+        }
+      }
+      // kickOneRef
+      if (e.key === "d") {
+        if (kickOneRef.current.paused) {
+          kickOneRef.current.play();
+        } else {
+          kickOneRef.current.currentTime = 0;
+        }
+      }
+      // kickTwoRef
+      if (e.key === "z") {
+        if (kickTwoRef.current.paused) {
+          kickTwoRef.current.play();
+        } else {
+          kickTwoRef.current.currentTime = 0;
+        }
+      }
+      // kickThreeRef
+      if (e.key === "x") {
+        if (kickThreeRef.current.paused) {
+          kickThreeRef.current.play();
+        } else {
+          kickThreeRef.current.currentTime = 0;
+        }
+      }
+      // snareOneRef
+      if (e.key === "c") {
+        if (snareOneRef.current.paused) {
+          snareOneRef.current.play();
+        } else {
+          snareOneRef.current.currentTime = 0;
+        }
+      }
+    });
+  }, []);
 
   return (
     <div id="drum-machine">
@@ -39,7 +123,13 @@ const Body = () => {
           id="clap_1"
         >
           Q
-          <audio id="Q" className="clip" src={clap_1} type="audio/ogg">
+          <audio
+            ref={clapOneRef}
+            id="Q"
+            className="clip"
+            src={clap_1}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -57,7 +147,13 @@ const Body = () => {
           id="clap_2"
         >
           W
-          <audio id="W" className="clip" src={clap_2} type="audio/ogg">
+          <audio
+            ref={clapTwoRef}
+            id="W"
+            className="clip"
+            src={clap_2}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -75,7 +171,13 @@ const Body = () => {
           id="hat_1"
         >
           E
-          <audio id="E" className="clip" src={hat_1} type="audio/ogg">
+          <audio
+            ref={hatOneRef}
+            id="E"
+            className="clip"
+            src={hat_1}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -93,7 +195,13 @@ const Body = () => {
           id="hat_2"
         >
           A
-          <audio id="A" className="clip" src={hat_2} type="audio/ogg">
+          <audio
+            ref={hatTwoRef}
+            id="A"
+            className="clip"
+            src={hat_2}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -111,7 +219,13 @@ const Body = () => {
           id="bass"
         >
           S
-          <audio id="S" className="clip" src={bass} type="audio/ogg">
+          <audio
+            ref={bassOneRef}
+            id="S"
+            className="clip"
+            src={bass}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -129,7 +243,13 @@ const Body = () => {
           id="kick_1"
         >
           D
-          <audio id="D" className="clip" src={kick_1} type="audio/ogg">
+          <audio
+            ref={kickOneRef}
+            id="D"
+            className="clip"
+            src={kick_1}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -147,7 +267,13 @@ const Body = () => {
           id="kick_2"
         >
           Z
-          <audio id="Z" className="clip" src={kick_2} type="audio/ogg">
+          <audio
+            ref={kickTwoRef}
+            id="Z"
+            className="clip"
+            src={kick_2}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -165,7 +291,13 @@ const Body = () => {
           id="kick_3"
         >
           X
-          <audio id="X" className="clip" src={kick_3} type="audio/ogg">
+          <audio
+            ref={kickThreeRef}
+            id="X"
+            className="clip"
+            src={kick_3}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -183,7 +315,13 @@ const Body = () => {
           id="snare_1"
         >
           C
-          <audio id="C" className="clip" src={snare_1} type="audio/ogg">
+          <audio
+            ref={snareOneRef}
+            id="C"
+            className="clip"
+            src={snare_1}
+            type="audio/ogg"
+          >
             Your browser does not support the audio element.
           </audio>
         </div>
