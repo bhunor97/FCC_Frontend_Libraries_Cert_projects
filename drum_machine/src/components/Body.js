@@ -27,8 +27,11 @@ const Body = () => {
   const volumeRef = useRef();
 
   const volumeFunc = () => {
-    // clapOneRef.current.volume == volumeRef.current.value;
-    console.log(volumeRef.current.value);
+    // volume slider
+    let allClips = document.querySelectorAll(".clip");
+    for (let i = 0; i < allClips.length; i++) {
+      allClips[i].volume = volumeRef.current.value / 100;
+    }
   };
 
   useEffect(() => {
@@ -138,9 +141,8 @@ const Body = () => {
           <div className="volume-container">
             <input
               type="range"
-              min="1"
+              min="0"
               max="100"
-              step="10"
               id="myVolume"
               class="volumeSlider"
               ref={volumeRef}
