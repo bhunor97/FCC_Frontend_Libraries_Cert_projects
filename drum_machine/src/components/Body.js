@@ -132,7 +132,7 @@ const Body = () => {
 
   return (
     <div id="drum-machine">
-      <h1>Drum Machine</h1>
+      <h1>Drum Machine Project</h1>
       <div className="drum-display-wrapper">
         <div className="display-volume-container">
           <div ref={dispRef} id="display">
