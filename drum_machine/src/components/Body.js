@@ -26,8 +26,8 @@ const Body = () => {
   const dispRef = useRef();
   const volumeRef = useRef();
 
+  // volume slider
   const volumeFunc = () => {
-    // volume slider
     let allClips = document.querySelectorAll(".clip");
     for (let i = 0; i < allClips.length; i++) {
       allClips[i].volume = volumeRef.current.value / 100;
@@ -138,6 +138,7 @@ const Body = () => {
           <div ref={dispRef} id="display">
             Click on something!
           </div>
+          {/* volume slider */}
           <div className="volume-container">
             <input
               type="range"
