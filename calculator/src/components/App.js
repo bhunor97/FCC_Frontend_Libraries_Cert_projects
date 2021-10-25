@@ -1,62 +1,142 @@
 import React from "react";
+import { useState, useEffect, useRef } from "react";
 import style from "../style/style.css";
 import resets from "../style/resets.css";
-const App = () => {
+
+const App = (props) => {
+  // useState
+  const [currentValue, setValue] = useState("0");
+
+  // AC button func
+  const clearButtonFunc = () => {
+    setValue(0);
+  };
+
+  const displayRef = useRef();
+
   return (
     <div className="calculator-wrapper">
-      <section id="display">Display Here</section>
+      {/* display */}
+      <section ref={displayRef} id="display">
+        {currentValue}
+      </section>
+      {/* buttons */}
       <section className="buttons-wrapper">
-        <div className="ac-btn" id="#">
+        <button
+          onClick={clearButtonFunc}
+          className="calc-buttons ac-btn"
+          id="clear"
+        >
           AC
-        </div>
-        <div className="calc-buttons /-btn" id="#">
+        </button>
+        <button className="calc-buttons /-btn" id="divide">
           /
-        </div>
-        <div className="calc-buttons X-btn" id="#">
+        </button>
+        <button className="calc-buttons X-btn" id="multiply">
           X
-        </div>
-        <div className="calc-buttons 7-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("7") : setValue(currentValue + "7");
+          }}
+          className="calc-buttons 7-btn"
+          id="seven"
+        >
           7
-        </div>
-        <div className="calc-buttons 8-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("8") : setValue(currentValue + "8");
+          }}
+          className="calc-buttons 8-btn"
+          id="eight"
+        >
           8
-        </div>
-        <div className="calc-buttons 9-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("9") : setValue(currentValue + "9");
+          }}
+          className="calc-buttons 9-btn"
+          id="nine"
+        >
           9
-        </div>
-        <div className="calc-buttons --btn" id="#">
+        </button>
+        <button className="calc-buttons --btn" id="subtract">
           -
-        </div>
-        <div className="calc-buttons 4-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("4") : setValue(currentValue + "4");
+          }}
+          className="calc-buttons 4-btn"
+          id="four"
+        >
           4
-        </div>
-        <div className="calc-buttons 5-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("5") : setValue(currentValue + "5");
+          }}
+          className="calc-buttons 5-btn"
+          id="five"
+        >
           5
-        </div>
-        <div className="calc-buttons 6-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("6") : setValue(currentValue + "6");
+          }}
+          className="calc-buttons 6-btn"
+          id="six"
+        >
           6
-        </div>
-        <div className="calc-buttons +-btn" id="#">
+        </button>
+        <button className="calc-buttons +-btn" id="add">
           +
-        </div>
-        <div className="calc-buttons 1-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("1") : setValue(currentValue + "1");
+          }}
+          className="calc-buttons 1-btn"
+          id="one"
+        >
           1
-        </div>
-        <div className="calc-buttons 2-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("2") : setValue(currentValue + "2");
+          }}
+          className="calc-buttons 2-btn"
+          id="two"
+        >
           2
-        </div>
-        <div className="calc-buttons 3-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue("3") : setValue(currentValue + "3");
+          }}
+          className="calc-buttons 3-btn"
+          id="three"
+        >
           3
-        </div>
-        <div className="calc-buttons equal-btn" id="#">
+        </button>
+        <button className="calc-buttons equal-btn" id="equals">
           =
-        </div>
-        <div className="calc-buttons 0-btn" id="#">
+        </button>
+        <button
+          onClick={() => {
+            currentValue == "0" ? setValue(0) : setValue(currentValue + "0");
+          }}
+          className="calc-buttons 0-btn"
+          id="zero"
+        >
           0
-        </div>
-        <div className="calc-buttons .-btn" id="#">
+        </button>
+        <button className="calc-buttons .-btn" id="decimal">
           .
-        </div>
+        </button>
       </section>
     </div>
   );
