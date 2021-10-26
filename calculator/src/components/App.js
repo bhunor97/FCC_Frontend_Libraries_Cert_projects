@@ -30,7 +30,21 @@ const App = (props) => {
         >
           AC
         </button>
-        <button className="calc-buttons /-btn" id="divide">
+        <button
+          onClick={() => {
+            if (currentValue == "0") {
+              return;
+            } else {
+              if (currentValue.split("").includes("/") == true) {
+                return null;
+              } else {
+                setValue(currentValue + "/");
+              }
+            }
+          }}
+          className="calc-buttons /-btn"
+          id="divide"
+        >
           /
         </button>
         <button className="calc-buttons X-btn" id="multiply">
@@ -123,7 +137,19 @@ const App = (props) => {
         >
           3
         </button>
-        <button className="calc-buttons equal-btn" id="equals">
+        <button
+          onClick={() => {
+            // Division - / - sign
+            let splitValues = currentValue.split("/");
+            let valueOne = parseInt(splitValues[0]);
+            let valueTwo = parseInt(splitValues[1]);
+            if (currentValue.split("").includes("/")) {
+              return setValue(valueOne / valueTwo);
+            }
+          }}
+          className="calc-buttons equal-btn"
+          id="equals"
+        >
           =
         </button>
         <button
