@@ -13,6 +13,7 @@ const App = (props) => {
   };
 
   const displayRef = useRef();
+  console.log(typeof currentValue);
 
   return (
     <div className="calculator-wrapper">
@@ -134,7 +135,17 @@ const App = (props) => {
         >
           0
         </button>
-        <button className="calc-buttons .-btn" id="decimal">
+        <button
+          onClick={() => {
+            if (currentValue.split("").includes(".") == false) {
+              setValue(currentValue + ".");
+            } else {
+              return null;
+            }
+          }}
+          className="calc-buttons .-btn"
+          id="decimal"
+        >
           .
         </button>
       </section>
