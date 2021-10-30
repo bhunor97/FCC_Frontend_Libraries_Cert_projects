@@ -35,8 +35,14 @@ const App = (props) => {
         <button
           onClick={() => {
             if (
-              typeof currentValue == "string" &&
-              currentValue.split("").includes("/")
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "/") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "-") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "+") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "x")
             ) {
               return;
             } else {
@@ -52,8 +58,14 @@ const App = (props) => {
         <button
           onClick={() => {
             if (
-              typeof currentValue == "string" &&
-              currentValue.split("").includes("x")
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "y") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "-") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "+") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "/")
             ) {
               return;
             } else {
@@ -96,8 +108,14 @@ const App = (props) => {
         <button
           onClick={() => {
             if (
-              typeof currentValue == "string" &&
-              currentValue.split("").includes("-")
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "-") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "/") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "+") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "x")
             ) {
               return;
             } else {
@@ -140,8 +158,14 @@ const App = (props) => {
         <button
           onClick={() => {
             if (
-              typeof currentValue === "string" &&
-              currentValue.split("").includes("+")
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "+") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "-") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "/") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "x")
             ) {
               return;
             } else {
@@ -214,6 +238,14 @@ const App = (props) => {
               let valueTwo = parseFloat(splitValues[1]);
               setValue(valueOne - valueTwo);
             }
+            // if (
+            //   (typeof currentValue == "string" && currentValue.includes("-")) ||
+            //   currentValue.includes("/") ||
+            //   currentValue.includes("x") ||
+            //   currentValue.includes("+")
+            // ) {
+            //   setValue(currentValue);
+            // }
           }}
           className="calc-buttons equal-btn"
           id="equals"
