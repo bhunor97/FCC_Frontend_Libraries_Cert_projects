@@ -9,11 +9,12 @@ const App = (props) => {
 
   // AC button func
   const clearButtonFunc = () => {
-    setValue(0);
+    setValue("0");
   };
 
   const displayRef = useRef();
   console.log(typeof currentValue);
+  console.log(currentValue);
 
   return (
     <div className="calculator-wrapper">
@@ -30,16 +31,16 @@ const App = (props) => {
         >
           AC
         </button>
+        {/* Division Button */}
         <button
           onClick={() => {
-            if (currentValue == "0") {
+            if (
+              typeof currentValue == "string" &&
+              currentValue.split("").includes("/")
+            ) {
               return;
             } else {
-              if (currentValue.split("").includes("/") == true) {
-                return null;
-              } else {
-                setValue(currentValue + "/");
-              }
+              setValue(currentValue + "/");
             }
           }}
           className="calc-buttons /-btn"
@@ -47,12 +48,26 @@ const App = (props) => {
         >
           /
         </button>
-        <button className="calc-buttons X-btn" id="multiply">
+        {/* Multiplication */}
+        <button
+          onClick={() => {
+            if (
+              typeof currentValue == "string" &&
+              currentValue.split("").includes("x")
+            ) {
+              return;
+            } else {
+              setValue(currentValue + "x");
+            }
+          }}
+          className="calc-buttons X-btn"
+          id="multiply"
+        >
           X
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("7") : setValue(currentValue + "7");
+            currentValue === "0" ? setValue("7") : setValue(currentValue + "7");
           }}
           className="calc-buttons 7-btn"
           id="seven"
@@ -61,7 +76,7 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("8") : setValue(currentValue + "8");
+            currentValue === "0" ? setValue("8") : setValue(currentValue + "8");
           }}
           className="calc-buttons 8-btn"
           id="eight"
@@ -70,19 +85,33 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("9") : setValue(currentValue + "9");
+            currentValue === "0" ? setValue("9") : setValue(currentValue + "9");
           }}
           className="calc-buttons 9-btn"
           id="nine"
         >
           9
         </button>
-        <button className="calc-buttons --btn" id="subtract">
+        {/* Subtraction */}
+        <button
+          onClick={() => {
+            if (
+              typeof currentValue == "string" &&
+              currentValue.split("").includes("-")
+            ) {
+              return;
+            } else {
+              setValue(currentValue + "-");
+            }
+          }}
+          className="calc-buttons minus-btn"
+          id="subtract"
+        >
           -
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("4") : setValue(currentValue + "4");
+            currentValue === "0" ? setValue("4") : setValue(currentValue + "4");
           }}
           className="calc-buttons 4-btn"
           id="four"
@@ -91,7 +120,7 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("5") : setValue(currentValue + "5");
+            currentValue === "0" ? setValue("5") : setValue(currentValue + "5");
           }}
           className="calc-buttons 5-btn"
           id="five"
@@ -100,19 +129,33 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("6") : setValue(currentValue + "6");
+            currentValue === "0" ? setValue("6") : setValue(currentValue + "6");
           }}
           className="calc-buttons 6-btn"
           id="six"
         >
           6
         </button>
-        <button className="calc-buttons +-btn" id="add">
+        {/* Addition button */}
+        <button
+          onClick={() => {
+            if (
+              typeof currentValue === "string" &&
+              currentValue.split("").includes("+")
+            ) {
+              return;
+            } else {
+              setValue(currentValue + "+");
+            }
+          }}
+          className="calc-buttons plus-btn"
+          id="add"
+        >
           +
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("1") : setValue(currentValue + "1");
+            currentValue === "0" ? setValue("1") : setValue(currentValue + "1");
           }}
           className="calc-buttons 1-btn"
           id="one"
@@ -121,7 +164,7 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("2") : setValue(currentValue + "2");
+            currentValue === "0" ? setValue("2") : setValue(currentValue + "2");
           }}
           className="calc-buttons 2-btn"
           id="two"
@@ -130,21 +173,46 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue("3") : setValue(currentValue + "3");
+            currentValue === "0" ? setValue("3") : setValue(currentValue + "3");
           }}
           className="calc-buttons 3-btn"
           id="three"
         >
           3
         </button>
+        {/* EQUALS */}
         <button
           onClick={() => {
-            // Division - / - sign
-            let splitValues = currentValue.split("/");
-            let valueOne = parseInt(splitValues[0]);
-            let valueTwo = parseInt(splitValues[1]);
-            if (currentValue.split("").includes("/")) {
-              return setValue(valueOne / valueTwo);
+            // Division
+            if (
+              typeof currentValue == "string" &&
+              currentValue.split("").includes("/")
+            ) {
+              let splitValues = currentValue.split("/");
+              let valueOne = parseFloat(splitValues[0]);
+              let valueTwo = parseFloat(splitValues[1]);
+              setValue(valueOne / valueTwo);
+            }
+            // Addition
+            if (typeof currentValue == "string" && currentValue.includes("+")) {
+              let splitValues = currentValue.split("+");
+              let valueOne = parseFloat(splitValues[0]);
+              let valueTwo = parseFloat(splitValues[1]);
+              setValue(valueOne + valueTwo);
+            }
+            // Multiplication
+            if (typeof currentValue == "string" && currentValue.includes("x")) {
+              let splitValues = currentValue.split("x");
+              let valueOne = parseFloat(splitValues[0]);
+              let valueTwo = parseFloat(splitValues[1]);
+              setValue(valueOne * valueTwo);
+            }
+            // Subtraction
+            if (typeof currentValue == "string" && currentValue.includes("-")) {
+              let splitValues = currentValue.split("-");
+              let valueOne = parseFloat(splitValues[0]);
+              let valueTwo = parseFloat(splitValues[1]);
+              setValue(valueOne - valueTwo);
             }
           }}
           className="calc-buttons equal-btn"
@@ -154,7 +222,7 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            currentValue == "0" ? setValue(0) : setValue(currentValue + "0");
+            currentValue === "0" ? setValue("0") : setValue(currentValue + "0");
           }}
           className="calc-buttons 0-btn"
           id="zero"
@@ -163,13 +231,16 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            if (currentValue.split("").includes(".") == false) {
-              setValue(currentValue + ".");
+            if (
+              typeof currentValue === "string" &&
+              currentValue.split("").includes(".")
+            ) {
+              return;
             } else {
-              return null;
+              setValue(currentValue + ".");
             }
           }}
-          className="calc-buttons .-btn"
+          className="calc-buttons decimal-btn"
           id="decimal"
         >
           .
