@@ -1,5 +1,17 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import {
+  atan2,
+  chain,
+  derivative,
+  e,
+  evaluate,
+  log,
+  pi,
+  pow,
+  round,
+  sqrt,
+} from "mathjs";
 import style from "../style/style.css";
 import resets from "../style/resets.css";
 
@@ -238,14 +250,20 @@ const App = (props) => {
               let valueTwo = parseFloat(splitValues[1]);
               setValue(valueOne - valueTwo);
             }
-            // if (
-            //   (typeof currentValue == "string" && currentValue.includes("-")) ||
-            //   currentValue.includes("/") ||
-            //   currentValue.includes("x") ||
-            //   currentValue.includes("+")
-            // ) {
-            //   setValue(currentValue);
-            // }
+            // Chain equations
+            if (
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "+") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "-") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "/") ||
+              (typeof currentValue == "string" &&
+                currentValue.split("").slice(-1) == "x")
+            ) {
+              let evaluated = evaluate(currentValue);
+              setValue(evaluated);
+            }
           }}
           className="calc-buttons equal-btn"
           id="equals"
