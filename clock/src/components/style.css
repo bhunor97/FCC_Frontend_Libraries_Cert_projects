@@ -65,3 +65,7 @@ h3 {
 #session-length {
   padding: 1rem;
 }
+
+#time-left {
+  padding: 2rem;
+}
