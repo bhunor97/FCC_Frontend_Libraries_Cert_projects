@@ -1,17 +1,6 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
-import {
-  atan2,
-  chain,
-  derivative,
-  e,
-  evaluate,
-  log,
-  pi,
-  pow,
-  round,
-  sqrt,
-} from "mathjs";
+import { useState } from "react";
+import { evaluate } from "mathjs";
 import style from "../style/style.css";
 import resets from "../style/resets.css";
 
@@ -24,15 +13,17 @@ const App = (props) => {
     setValue("0");
   };
 
-  const displayRef = useRef();
+  // Regex
+  const regexSigns = /[+,*,/,-]/g;
+
   console.log(typeof currentValue);
   console.log(currentValue);
 
   return (
     <div className="calculator-wrapper">
       {/* display */}
-      <section ref={displayRef} id="display">
-        {currentValue}
+      <section id="display">
+        <div className="calc-div">{currentValue}</div>
       </section>
       {/* buttons */}
       <section className="buttons-wrapper">
@@ -47,16 +38,23 @@ const App = (props) => {
         <button
           onClick={() => {
             if (
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "/") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "-") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "+") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "x")
+              typeof currentValue == "string" &&
+              currentValue.split("").slice(-1) == "/"
             ) {
               return;
+            }
+            if (
+              typeof currentValue == "string" &&
+              currentValue.slice(-1).match(regexSigns)
+            ) {
+              if (currentValue.slice(-2, -1).match(regexSigns)) {
+                setValue(
+                  currentValue.substring(0, currentValue.length - 2) + "/"
+                );
+              } else
+                setValue(
+                  currentValue.substring(0, currentValue.length - 1) + "/"
+                );
             } else {
               setValue(currentValue + "/");
             }
@@ -70,18 +68,25 @@ const App = (props) => {
         <button
           onClick={() => {
             if (
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "y") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "-") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "+") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "/")
+              typeof currentValue == "string" &&
+              currentValue.split("").slice(-1) == "*"
             ) {
               return;
+            }
+            if (
+              typeof currentValue == "string" &&
+              currentValue.slice(-1).match(regexSigns)
+            ) {
+              if (currentValue.slice(-2, -1).match(regexSigns)) {
+                setValue(
+                  currentValue.substring(0, currentValue.length - 2) + "*"
+                );
+              } else
+                setValue(
+                  currentValue.substring(0, currentValue.length - 1) + "*"
+                );
             } else {
-              setValue(currentValue + "x");
+              setValue(currentValue + "*");
             }
           }}
           className="calc-buttons X-btn"
@@ -120,16 +125,16 @@ const App = (props) => {
         <button
           onClick={() => {
             if (
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "-") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "/") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "+") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "x")
+              typeof currentValue == "string" &&
+              currentValue.split("").slice(-1) == "-"
             ) {
               return;
+            }
+            if (
+              typeof currentValue == "string" &&
+              currentValue.slice(-1).match(regexSigns)
+            ) {
+              setValue(currentValue.substring(0, currentValue.length) + "-");
             } else {
               setValue(currentValue + "-");
             }
@@ -170,16 +175,23 @@ const App = (props) => {
         <button
           onClick={() => {
             if (
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "+") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "-") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "/") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "x")
+              typeof currentValue == "string" &&
+              currentValue.split("").slice(-1) == "+"
             ) {
               return;
+            }
+            if (
+              typeof currentValue == "string" &&
+              currentValue.slice(-1).match(regexSigns)
+            ) {
+              if (currentValue.slice(-2, -1).match(regexSigns)) {
+                setValue(
+                  currentValue.substring(0, currentValue.length - 2) + "+"
+                );
+              } else
+                setValue(
+                  currentValue.substring(0, currentValue.length - 1) + "+"
+                );
             } else {
               setValue(currentValue + "+");
             }
@@ -219,51 +231,7 @@ const App = (props) => {
         {/* EQUALS */}
         <button
           onClick={() => {
-            // Division
-            if (
-              typeof currentValue == "string" &&
-              currentValue.split("").includes("/")
-            ) {
-              let splitValues = currentValue.split("/");
-              let valueOne = parseFloat(splitValues[0]);
-              let valueTwo = parseFloat(splitValues[1]);
-              setValue(valueOne / valueTwo);
-            }
-            // Addition
-            if (typeof currentValue == "string" && currentValue.includes("+")) {
-              let splitValues = currentValue.split("+");
-              let valueOne = parseFloat(splitValues[0]);
-              let valueTwo = parseFloat(splitValues[1]);
-              setValue(valueOne + valueTwo);
-            }
-            // Multiplication
-            if (typeof currentValue == "string" && currentValue.includes("x")) {
-              let splitValues = currentValue.split("x");
-              let valueOne = parseFloat(splitValues[0]);
-              let valueTwo = parseFloat(splitValues[1]);
-              setValue(valueOne * valueTwo);
-            }
-            // Subtraction
-            if (typeof currentValue == "string" && currentValue.includes("-")) {
-              let splitValues = currentValue.split("-");
-              let valueOne = parseFloat(splitValues[0]);
-              let valueTwo = parseFloat(splitValues[1]);
-              setValue(valueOne - valueTwo);
-            }
-            // Chain equations
-            if (
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "+") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "-") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "/") ||
-              (typeof currentValue == "string" &&
-                currentValue.split("").slice(-1) == "x")
-            ) {
-              let evaluated = evaluate(currentValue);
-              setValue(evaluated);
-            }
+            setValue(evaluate(currentValue));
           }}
           className="calc-buttons equal-btn"
           id="equals"
@@ -281,12 +249,23 @@ const App = (props) => {
         </button>
         <button
           onClick={() => {
-            if (
-              typeof currentValue === "string" &&
-              currentValue.split("").includes(".")
-            ) {
-              return;
-            } else {
+            // if (
+            //   typeof currentValue == "string" &&
+            //   currentValue.split("").slice(-1) == "."
+            // ) {
+            //   return;
+            // } else {
+            //   setValue(currentValue + ".");
+            // }
+
+            let maximum = Math.max(
+              currentValue.lastIndexOf("*"),
+              currentValue.lastIndexOf("/"),
+              currentValue.lastIndexOf("+"),
+              currentValue.lastIndexOf("-")
+            );
+
+            if (currentValue.lastIndexOf(".") <= maximum) {
               setValue(currentValue + ".");
             }
           }}

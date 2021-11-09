@@ -1,0 +1,71 @@
+/* main */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 1px solid black;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 25rem;
+  min-height: 35rem;
+}
+
+/* containers */
+.break-session-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-display-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  min-height: 5rem;
+  text-align: center;
+}
+
+/* elements */
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+h2,
+h3 {
+  padding: 1rem;
+}
+
+#break-length,
+#session-length {
+  padding: 1rem;
+}
+
+#time-left {
+  padding: 2rem;
+}
