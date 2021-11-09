@@ -9,7 +9,10 @@ function App() {
   const [currentMinute, setMinute] = useState(25);
   const [currentSecond, setSecond] = useState("00");
   const [isRunning, setIsRunning] = useState(false);
+  // const [minuteId, setMinuteId] = useState(null);
+  const [secondId, setSecondId] = useState(null);
 
+  // On load values
   useEffect(() => {
     setBreakLength(5);
     setSeshLength(25);
@@ -42,35 +45,22 @@ function App() {
     setMinute(currentSeshLength - 1);
   };
 
-  // Timer function
-  const timerFunc = () => {
-    if (isRunning == false) {
-      setIsRunning(true);
-      if (setIsRunning) {
-        // Minutes
-        window.setInterval(() => {
-          setMinute((currentMinute) => currentMinute - 1);
-        }, 60000);
-
-        // Seconds
-        setSecond(60);
-        window.setInterval(() => {
-          setSecond((currentSecond) => currentSecond - 1);
-        }, 100);
-      }
-    } else if (isRunning == true) {
-      setIsRunning(false);
-      if (isRunning == false) {
-        // FINISH THIS
-        // FINISH THIS
-        // FINISH THIS
-        // https://www.youtube.com/watch?v=sWKz9aLovjY
-      }
+  // Timer use Effect
+  useEffect(() => {
+    if (isRunning) {
+      setSecond(60);
+      const secId = window.setInterval(() => {
+        setSecond((currentSecond) => currentSecond - 1);
+      }, 1000);
+      setSecondId(secId);
+    } else if (isRunning === false) {
+      window.clearInterval(secondId);
     }
-  };
+  }, [isRunning]);
 
   console.log(typeof currentSecond);
   console.log(currentSecond);
+  console.log(isRunning);
 
   return (
     <div className="App">
@@ -110,10 +100,21 @@ function App() {
           {currentMinute}:{currentSecond}
         </div>
         <div className="btn-display-container">
-          <button id="start_stop" onClick={timerFunc}>
+          <button
+            id="start_stop"
+            onClick={() => {
+              if (isRunning === true) {
+                setIsRunning(false);
+              } else if (isRunning === false) {
+                setIsRunning(true);
+              }
+            }}
+          >
             start-stop-btn
           </button>
-          <button id="reset">reset-btn</button>
+          <button id="reset" onClick={resetFunc}>
+            reset-btn
+          </button>
         </div>
       </section>
     </div>
