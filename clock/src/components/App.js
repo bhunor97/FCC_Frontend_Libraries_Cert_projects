@@ -4,9 +4,9 @@ import "./style.css";
 
 function App() {
   // states
-  const [currentDisplay, setDisplay] = useState("Session");
   const [currentBreakLenght, setBreakLength] = useState(5);
   const [currentSeshLength, setSeshLength] = useState(25);
+
   const [currentMinute, setMinute] = useState(25);
   const [currentSecond, setSecond] = useState("00");
 
@@ -15,6 +15,10 @@ function App() {
 
   const [minuteId, setMinuteId] = useState(null);
   const [secondId, setSecondId] = useState(null);
+
+  const [currentDisplay, setDisplay] = useState("Session");
+  const [isSecZero, setSecZero] = useState(null);
+  const [isMinZero, setMinZero] = useState(null);
 
   // On load values
   useEffect(() => {
@@ -85,13 +89,13 @@ function App() {
       // Seconds;
       const secId = window.setInterval(() => {
         setSecond((currentSecond) => currentSecond - 1);
-      }, 1000);
+      }, 100);
       setSecondId(secId);
 
       // Minutes
       const minId = window.setInterval(() => {
         setMinute((currentMinute) => currentMinute - 1);
-      }, 60000);
+      }, 6000);
       setMinuteId(minId);
       // Stop
     } else if (isRunning === false) {
@@ -99,6 +103,34 @@ function App() {
       window.clearInterval(minuteId);
     }
   }, [isRunning]);
+
+  // Reaching zero seconds useEffect
+  useEffect(() => {
+    if (currentSecond > 0 || typeof currentSecond === "string") {
+      setSecZero(false);
+    } else if (currentSecond <= 0) {
+      setSecZero(true);
+      if (isSecZero) {
+        setSecond(59);
+      }
+    }
+  }, [currentSecond]);
+
+  // Reaching zero minutes useEffect
+  useEffect(() => {
+    if (currentMinute > 0) {
+      setMinZero(false);
+    } else if (currentMinute <= 0) {
+      setMinZero(true);
+      if (isMinZero) {
+        setMinute(currentBreakLenght);
+        setDisplay("Break");
+      }
+    }
+  }, [currentMinute]);
+
+  console.log(currentSecond);
+  console.log(isSecZero);
 
   return (
     <div className="App">
