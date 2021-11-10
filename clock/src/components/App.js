@@ -4,12 +4,16 @@ import "./style.css";
 
 function App() {
   // states
+  const [currentDisplay, setDisplay] = useState("Session");
   const [currentBreakLenght, setBreakLength] = useState(5);
   const [currentSeshLength, setSeshLength] = useState(25);
   const [currentMinute, setMinute] = useState(25);
   const [currentSecond, setSecond] = useState("00");
+
   const [isRunning, setIsRunning] = useState(false);
-  // const [minuteId, setMinuteId] = useState(null);
+  const [timerStarted, setTimer] = useState(false);
+
+  const [minuteId, setMinuteId] = useState(null);
   const [secondId, setSecondId] = useState(null);
 
   // On load values
@@ -25,14 +29,26 @@ function App() {
     setSeshLength(25);
     setMinute(25);
     setSecond("00");
+    setTimer(false);
+    // Stop
+    window.clearInterval(secondId);
+    window.clearInterval(minuteId);
   };
 
   // Break Increment / Decrement functions
   const incrementBreak = () => {
-    setBreakLength(currentBreakLenght + 1);
+    if (currentBreakLenght < 60) {
+      setBreakLength(currentBreakLenght + 1);
+    } else {
+      return;
+    }
   };
   const decrementBreak = () => {
-    setBreakLength(currentBreakLenght - 1);
+    if (currentBreakLenght <= 1) {
+      return;
+    } else {
+      setBreakLength(currentBreakLenght - 1);
+    }
   };
 
   // Session Increment / Decrement
@@ -41,26 +57,48 @@ function App() {
     setMinute(currentSeshLength + 1);
   };
   const decrementSesh = () => {
-    setSeshLength(currentSeshLength - 1);
-    setMinute(currentSeshLength - 1);
+    if (currentSeshLength <= 1) {
+      return;
+    } else {
+      setSeshLength(currentSeshLength - 1);
+      setMinute(currentSeshLength - 1);
+    }
   };
 
-  // Timer use Effect
+  // Timer Started
+  let startTimer = () => {
+    if (timerStarted === false) {
+      setTimer(true);
+    }
+  };
+
+  useEffect(() => {
+    if (timerStarted) {
+      setSecond(59);
+      setMinute(currentMinute - 1);
+    }
+  }, [timerStarted]);
+
+  // Countdown useEffect
   useEffect(() => {
     if (isRunning) {
-      setSecond(60);
+      // Seconds;
       const secId = window.setInterval(() => {
         setSecond((currentSecond) => currentSecond - 1);
       }, 1000);
       setSecondId(secId);
+
+      // Minutes
+      const minId = window.setInterval(() => {
+        setMinute((currentMinute) => currentMinute - 1);
+      }, 60000);
+      setMinuteId(minId);
+      // Stop
     } else if (isRunning === false) {
       window.clearInterval(secondId);
+      window.clearInterval(minuteId);
     }
   }, [isRunning]);
-
-  console.log(typeof currentSecond);
-  console.log(currentSecond);
-  console.log(isRunning);
 
   return (
     <div className="App">
@@ -95,7 +133,7 @@ function App() {
       </div>
       {/* Timer Section */}
       <section id="timer-label">
-        <h2>Session</h2>
+        <h2>{currentDisplay}</h2>
         <div id="time-left">
           {currentMinute}:{currentSecond}
         </div>
@@ -108,6 +146,7 @@ function App() {
               } else if (isRunning === false) {
                 setIsRunning(true);
               }
+              startTimer();
             }}
           >
             start-stop-btn
@@ -122,6 +161,3 @@ function App() {
 }
 
 export default App;
-
-// User Story #8
-// User Story #11
