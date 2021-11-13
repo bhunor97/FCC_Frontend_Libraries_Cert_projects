@@ -21,6 +21,9 @@ function App() {
   const [isSecZero, setSecZero] = useState(null);
   const [isMinZero, setMinZero] = useState(null);
 
+  const [isSessionOn, setSetSessionOn] = useState(null);
+  const [isBreakOn, setBreakOn] = useState(null);
+
   // On load values
   useEffect(() => {
     setBreakLength(5);
@@ -128,12 +131,14 @@ function App() {
       if (isMinZero) {
         setMinute(currentBreakLenght - 1);
         setDisplay("Break");
+      } else if (currentDisplay === "Break") {
+        setMinute(currentSeshLength - 1);
+        setDisplay("Session");
       }
     }
   }, [currentMinute]);
 
-  console.log(currentSecond);
-  console.log(isSecZero);
+  console.log(currentDisplay);
 
   return (
     <div className="App">
@@ -167,8 +172,8 @@ function App() {
         </section>
       </div>
       {/* Timer Section */}
-      <section id="timer-label">
-        <h2>{currentDisplay}</h2>
+      <section>
+        <h2 id="timer-label">{currentDisplay}</h2>
         <div id="time-left">
           {currentMinute}:{currentSecond}
         </div>
