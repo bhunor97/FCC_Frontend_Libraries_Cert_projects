@@ -17,6 +17,7 @@ function App() {
   const [secondId, setSecondId] = useState(null);
 
   const [currentDisplay, setDisplay] = useState("Session");
+
   const [isSecZero, setSecZero] = useState(null);
   const [isMinZero, setMinZero] = useState(null);
 
@@ -92,15 +93,16 @@ function App() {
       }, 100);
       setSecondId(secId);
 
-      // Minutes
-      const minId = window.setInterval(() => {
-        setMinute((currentMinute) => currentMinute - 1);
-      }, 6000);
-      setMinuteId(minId);
+      // // Minutes
+      // const minId = window.setInterval(() => {
+      //   setMinute((currentMinute) => currentMinute - 1);
+      // }, 6000);
+      // setMinuteId(minId);
+
       // Stop
     } else if (isRunning === false) {
       window.clearInterval(secondId);
-      window.clearInterval(minuteId);
+      // window.clearInterval(minuteId);
     }
   }, [isRunning]);
 
@@ -112,6 +114,7 @@ function App() {
       setSecZero(true);
       if (isSecZero) {
         setSecond(59);
+        setMinute(currentMinute - 1);
       }
     }
   }, [currentSecond]);
@@ -123,7 +126,7 @@ function App() {
     } else if (currentMinute <= 0) {
       setMinZero(true);
       if (isMinZero) {
-        setMinute(currentBreakLenght);
+        setMinute(currentBreakLenght - 1);
         setDisplay("Break");
       }
     }
@@ -140,12 +143,12 @@ function App() {
         <section id="break-label">
           <h3>Break Length</h3>
           <div className="btn-display-container">
-            <button id="break-decrement" onClick={incrementBreak}>
-              +break
-            </button>
-            <div id="break-length">{currentBreakLenght}</div>
             <button id="break-increment" onClick={decrementBreak}>
               -break
+            </button>
+            <div id="break-length">{currentBreakLenght}</div>
+            <button id="break-decrement" onClick={incrementBreak}>
+              +break
             </button>
           </div>
         </section>
@@ -153,12 +156,12 @@ function App() {
         <section id="session-label">
           <h3>Session Length</h3>
           <div className="btn-display-container">
-            <button id="session-decrement" onClick={incrementSesh}>
-              +sesh
-            </button>
-            <div id="session-length">{currentSeshLength}</div>
             <button id="session-increment" onClick={decrementSesh}>
               -sesh
+            </button>
+            <div id="session-length">{currentSeshLength}</div>
+            <button id="session-decrement" onClick={incrementSesh}>
+              +sesh
             </button>
           </div>
         </section>
@@ -173,11 +176,13 @@ function App() {
           <button
             id="start_stop"
             onClick={() => {
+              // isRunning toggle
               if (isRunning === true) {
                 setIsRunning(false);
               } else if (isRunning === false) {
                 setIsRunning(true);
               }
+              // startTimer function call
               startTimer();
             }}
           >
