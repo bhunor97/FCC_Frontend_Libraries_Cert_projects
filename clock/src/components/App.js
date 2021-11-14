@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { evaluate } from "mathjs";
 import "./style.css";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [timerStarted, setTimer] = useState(false);
 
-  const [minuteId, setMinuteId] = useState(null);
+  // const [minuteId, setMinuteId] = useState(null);
   const [secondId, setSecondId] = useState(null);
 
   const [currentDisplay, setDisplay] = useState("Session");
@@ -21,8 +22,8 @@ function App() {
   const [isSecZero, setSecZero] = useState(null);
   const [isMinZero, setMinZero] = useState(null);
 
-  const [isSessionOn, setSetSessionOn] = useState(null);
-  const [isBreakOn, setBreakOn] = useState(null);
+  // const [isSessionOn, setSetSessionOn] = useState(null);
+  // const [isBreakOn, setBreakOn] = useState(null);
 
   // On load values
   useEffect(() => {
@@ -40,34 +41,36 @@ function App() {
     setTimer(false);
     // Stop
     window.clearInterval(secondId);
-    window.clearInterval(minuteId);
+    // window.clearInterval(minuteId);
   };
 
   // Break Increment / Decrement functions
   const incrementBreak = () => {
-    if (currentBreakLenght < 60) {
+    if (!isRunning && currentBreakLenght < 60) {
       setBreakLength(currentBreakLenght + 1);
     } else {
       return;
     }
   };
   const decrementBreak = () => {
-    if (currentBreakLenght <= 1) {
+    if (!isRunning && currentBreakLenght <= 1) {
       return;
-    } else {
+    } else if (!isRunning && currentSeshLength > 1) {
       setBreakLength(currentBreakLenght - 1);
     }
   };
 
   // Session Increment / Decrement
   const incrementSesh = () => {
-    setSeshLength(currentSeshLength + 1);
-    setMinute(currentSeshLength + 1);
+    if (!isRunning && currentSeshLength < 60) {
+      setSeshLength(currentSeshLength + 1);
+      setMinute(currentSeshLength + 1);
+    }
   };
   const decrementSesh = () => {
-    if (currentSeshLength <= 1) {
+    if (!isRunning && currentSeshLength <= 1) {
       return;
-    } else {
+    } else if (!isRunning && currentSeshLength > 1) {
       setSeshLength(currentSeshLength - 1);
       setMinute(currentSeshLength - 1);
     }
@@ -93,7 +96,7 @@ function App() {
       // Seconds;
       const secId = window.setInterval(() => {
         setSecond((currentSecond) => currentSecond - 1);
-      }, 100);
+      }, 1000);
       setSecondId(secId);
 
       // // Minutes
