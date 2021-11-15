@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { evaluate, isZero } from "mathjs";
 import "./style.css";
 
 function App() {
   // variables
   let doubleZero = ("0" + 0).slice(-2);
+  let countdownTime = 1000;
 
   // states
   const [currentBreakLenght, setBreakLength] = useState(5);
@@ -126,7 +126,7 @@ function App() {
       // Seconds;
       const secId = window.setInterval(() => {
         setSecond((currentSecond) => currentSecond - 1);
-      }, 100);
+      }, countdownTime);
       setSecondId(secId);
 
       // Stop
@@ -152,17 +152,6 @@ function App() {
         setSecond(doubleZero);
       }
     }
-    // if (isRunning && currentMinute < 0) {
-    //   if (currentDisplay === "Session") {
-    //     setDisplay("Break");
-    //     setMinute(currentBreakLenght - 1);
-    //   } else if (currentDisplay === "Break") {
-    //     {
-    //       setDisplay("Session");
-    //       setMinute(currentSeshLength - 1);
-    //     }
-    //   }
-    // }
   }, [currentMinute]);
 
   // Reaching 0 Seconds useEffect
@@ -171,14 +160,9 @@ function App() {
     if (currentSecond < 10 && currentSecond >= 0) {
       setSecond(("0" + currentSecond).slice(-2));
     }
-    if (isRunning && currentSecond === "00") {
-      setSecZero(true);
-      if (isZero) {
-        setSecond(59);
-        setMinute(currentMinute - 1);
-      }
-    } else {
-      setSecZero(false);
+    if (isRunning && currentSecond < 0) {
+      setSecond(59);
+      setMinute(currentMinute - 1);
     }
   }, [currentSecond]);
 
@@ -248,5 +232,3 @@ function App() {
 }
 
 export default App;
-
-// cannot reach 00 yet
