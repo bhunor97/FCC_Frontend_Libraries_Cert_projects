@@ -1,26 +1,25 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { evaluate } from "mathjs";
+import { evaluate, isZero } from "mathjs";
 import "./style.css";
 
 function App() {
+  // variables
+  let doubleZero = ("0" + 0).slice(-2);
+
   // states
   const [currentBreakLenght, setBreakLength] = useState(5);
   const [currentSeshLength, setSeshLength] = useState(25);
 
   const [currentMinute, setMinute] = useState(25);
-  const [currentSecond, setSecond] = useState("00");
+  const [currentSecond, setSecond] = useState(doubleZero);
 
   const [isRunning, setIsRunning] = useState(false);
   const [timerStarted, setTimer] = useState(false);
 
-  // const [minuteId, setMinuteId] = useState(null);
   const [secondId, setSecondId] = useState(null);
-
   const [currentDisplay, setDisplay] = useState("Session");
-
   const [isSecZero, setSecZero] = useState(null);
-  const [isMinZero, setMinZero] = useState(false);
 
   // On load values
   useEffect(() => {
@@ -34,7 +33,7 @@ function App() {
     setBreakLength(5);
     setSeshLength(25);
     setMinute(25);
-    setSecond("00");
+    setSecond(doubleZero);
     setTimer(false);
     setDisplay("Session");
     // Stop
@@ -136,36 +135,55 @@ function App() {
     }
   }, [isRunning]);
 
+  // Reaching 0 Minutes useEffect
+  useEffect(() => {
+    // min below 10
+    if (currentMinute < 10) {
+      setMinute(("0" + currentMinute).slice(-2));
+    }
+
+    if (isRunning && currentMinute < 0) {
+      setDisplay("Break");
+      setMinute(currentBreakLenght);
+      setSecond(doubleZero);
+      if (currentDisplay === "Break") {
+        setDisplay("Session");
+        setMinute(currentSeshLength);
+        setSecond(doubleZero);
+      }
+    }
+    // if (isRunning && currentMinute < 0) {
+    //   if (currentDisplay === "Session") {
+    //     setDisplay("Break");
+    //     setMinute(currentBreakLenght - 1);
+    //   } else if (currentDisplay === "Break") {
+    //     {
+    //       setDisplay("Session");
+    //       setMinute(currentSeshLength - 1);
+    //     }
+    //   }
+    // }
+  }, [currentMinute]);
+
   // Reaching 0 Seconds useEffect
   useEffect(() => {
-    if (currentSecond > 0 || typeof currentSecond === "string") {
-      setSecZero(false);
-    } else if (currentSecond <= 0) {
+    // sec below 10
+    if (currentSecond < 10 && currentSecond >= 0) {
+      setSecond(("0" + currentSecond).slice(-2));
+    }
+    if (isRunning && currentSecond === "00") {
       setSecZero(true);
-      if (isSecZero) {
+      if (isZero) {
         setSecond(59);
         setMinute(currentMinute - 1);
       }
+    } else {
+      setSecZero(false);
     }
   }, [currentSecond]);
 
-  // Reaching 0 Minutes useEffect
-  useEffect(() => {
-    if (isRunning && currentMinute < 0) {
-      if (currentDisplay === "Session") {
-        setDisplay("Break");
-        setMinute(currentBreakLenght - 1);
-      } else if (currentDisplay === "Break") {
-        {
-          setDisplay("Session");
-          setMinute(currentSeshLength - 1);
-        }
-      }
-    }
-  }, [currentMinute]);
-
-  console.log(isMinZero);
-  console.log(currentSecond);
+  console.log("Minutes: " + currentMinute);
+  console.log("Seconds: " + currentMinute);
 
   return (
     <div className="App">
@@ -205,6 +223,9 @@ function App() {
           {currentMinute}:{currentSecond}
         </div>
         <div className="btn-display-container">
+          <button id="reset" onClick={resetFunc}>
+            reset-btn
+          </button>
           <button
             id="start_stop"
             onClick={() => {
@@ -220,9 +241,6 @@ function App() {
           >
             start-stop-btn
           </button>
-          <button id="reset" onClick={resetFunc}>
-            reset-btn
-          </button>
         </div>
       </section>
     </div>
@@ -231,5 +249,4 @@ function App() {
 
 export default App;
 
-// adjustable break length during breaks
-// break - countdown to 0:59 and lower
+// cannot reach 00 yet
