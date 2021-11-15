@@ -20,10 +20,7 @@ function App() {
   const [currentDisplay, setDisplay] = useState("Session");
 
   const [isSecZero, setSecZero] = useState(null);
-  const [isMinZero, setMinZero] = useState(null);
-
-  // const [isSessionOn, setSetSessionOn] = useState(null);
-  // const [isBreakOn, setBreakOn] = useState(null);
+  const [isMinZero, setMinZero] = useState(false);
 
   // On load values
   useEffect(() => {
@@ -39,38 +36,72 @@ function App() {
     setMinute(25);
     setSecond("00");
     setTimer(false);
+    setDisplay("Session");
     // Stop
     window.clearInterval(secondId);
-    // window.clearInterval(minuteId);
   };
 
-  // Break Increment / Decrement functions
+  // BREAK LENGTH
+  // Break Increment
   const incrementBreak = () => {
-    if (!isRunning && currentBreakLenght < 60) {
+    // during "Session"
+    if (!isRunning && currentDisplay === "Session" && currentBreakLenght < 60) {
       setBreakLength(currentBreakLenght + 1);
+    }
+    // during "Break"
+    else if (
+      !isRunning &&
+      currentDisplay === "Break" &&
+      currentBreakLenght < 60
+    ) {
+      setBreakLength(currentBreakLenght + 1);
+      setMinute(currentBreakLenght + 1);
     } else {
       return;
     }
   };
+  // Break Decrement
   const decrementBreak = () => {
-    if (!isRunning && currentBreakLenght <= 1) {
+    // during "Session"
+    if (!isRunning && currentDisplay === "Session" && currentBreakLenght <= 1) {
       return;
-    } else if (!isRunning && currentSeshLength > 1) {
+    } else if (
+      !isRunning &&
+      currentDisplay === "Session" &&
+      currentBreakLenght > 1
+    ) {
       setBreakLength(currentBreakLenght - 1);
+    }
+    // during "Break"
+    if (!isRunning && currentDisplay === "Break" && currentBreakLenght <= 1) {
+      return;
+    } else if (
+      !isRunning &&
+      currentDisplay === "Break" &&
+      currentBreakLenght > 1
+    ) {
+      setBreakLength(currentBreakLenght - 1);
+      setMinute(currentBreakLenght - 1);
     }
   };
 
-  // Session Increment / Decrement
+  // SESSION LENGHT
+  // Session Increment
   const incrementSesh = () => {
-    if (!isRunning && currentSeshLength < 60) {
+    if (!isRunning && currentDisplay === "Session" && currentSeshLength < 60) {
       setSeshLength(currentSeshLength + 1);
       setMinute(currentSeshLength + 1);
     }
   };
+  // Session Decrement
   const decrementSesh = () => {
-    if (!isRunning && currentSeshLength <= 1) {
+    if (!isRunning && currentDisplay === "Session" && currentSeshLength <= 1) {
       return;
-    } else if (!isRunning && currentSeshLength > 1) {
+    } else if (
+      !isRunning &&
+      currentDisplay === "Session" &&
+      currentSeshLength > 1
+    ) {
       setSeshLength(currentSeshLength - 1);
       setMinute(currentSeshLength - 1);
     }
@@ -96,23 +127,16 @@ function App() {
       // Seconds;
       const secId = window.setInterval(() => {
         setSecond((currentSecond) => currentSecond - 1);
-      }, 1000);
+      }, 100);
       setSecondId(secId);
-
-      // // Minutes
-      // const minId = window.setInterval(() => {
-      //   setMinute((currentMinute) => currentMinute - 1);
-      // }, 6000);
-      // setMinuteId(minId);
 
       // Stop
     } else if (isRunning === false) {
       window.clearInterval(secondId);
-      // window.clearInterval(minuteId);
     }
   }, [isRunning]);
 
-  // Reaching zero seconds useEffect
+  // Reaching 0 Seconds useEffect
   useEffect(() => {
     if (currentSecond > 0 || typeof currentSecond === "string") {
       setSecZero(false);
@@ -125,23 +149,23 @@ function App() {
     }
   }, [currentSecond]);
 
-  // Reaching zero minutes useEffect
+  // Reaching 0 Minutes useEffect
   useEffect(() => {
-    if (currentMinute > 0) {
-      setMinZero(false);
-    } else if (currentMinute <= 0) {
-      setMinZero(true);
-      if (isMinZero) {
-        setMinute(currentBreakLenght - 1);
+    if (isRunning && currentMinute < 0) {
+      if (currentDisplay === "Session") {
         setDisplay("Break");
+        setMinute(currentBreakLenght - 1);
       } else if (currentDisplay === "Break") {
-        setMinute(currentSeshLength - 1);
-        setDisplay("Session");
+        {
+          setDisplay("Session");
+          setMinute(currentSeshLength - 1);
+        }
       }
     }
   }, [currentMinute]);
 
-  console.log(currentDisplay);
+  console.log(isMinZero);
+  console.log(currentSecond);
 
   return (
     <div className="App">
@@ -206,3 +230,6 @@ function App() {
 }
 
 export default App;
+
+// adjustable break length during breaks
+// break - countdown to 0:59 and lower
