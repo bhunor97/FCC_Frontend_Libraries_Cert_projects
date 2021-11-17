@@ -3,7 +3,23 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  background-color: var(--color_4);
+}
+
+/* TITLE */
+.title-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 5rem;
+  font-size: 1.5rem;
+  padding: 15px;
+  color: #fff;
+  border: 1px solid black;
+  box-shadow: 5px 5px 0 0 #000;
 }
 
 /* WRAPPER */
@@ -12,7 +28,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 25rem;
   margin: auto;
+  padding: 25px 0 25px 0;
+  background-color: var(--color_1);
+  /* border: 5px solid #e6c653; */
+  box-shadow: 15px 20px 0px 0px #e6c653b0;
 }
 
 /* DISPLAY */
@@ -22,8 +43,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
-  width: 20rem;
+  width: 80%;
 }
 
 .calc-div,
@@ -34,8 +54,17 @@ body {
   justify-content: center;
   text-align: center;
   width: 100%;
-  height: 2rem;
-  padding: 10px;
+  min-height: 2rem;
+  background-color: #fff;
+}
+
+.calc-div {
+  height: 5rem;
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  font-size: 2rem;
+  width: 100%;
+  word-break: break-word;
+  height: 100%;
 }
 
 /* BUTTONS */
@@ -55,6 +84,11 @@ body {
   grid-row: 4 / 6;
 }
 
+.zero-btn {
+  grid-column: 1 / 3;
+  grid-row: 5;
+}
+
 .calc-buttons {
   padding: 1.5rem;
   display: flex;
@@ -62,9 +96,31 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border: none;
   transition: 0.1s ease;
+  background-color: rgb(78, 78, 78);
+  color: #fff;
+  border: 2px solid transparent;
 }
 
 .calc-buttons:hover {
-  opacity: 0.5;
+  opacity: 0.7;
+  border: 2px solid #fff;
+  color: #000;
+}
+
+/* operator buttons */
+.division-btn,
+.multiplication-btn,
+.minus-btn,
+.plus-btn {
+  background-color: rgb(121, 121, 121);
+}
+
+.ac-btn {
+  background-color: var(--color_5);
+}
+
+.equal-btn {
+  background-color: var(--color_4);
 }

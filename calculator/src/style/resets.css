@@ -2,5 +2,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  border: 1px solid black;
+  /* font-family: "Bungee Shade", cursive; */
+  font-family: "Black Ops One", cursive;
+  /* border: 1px solid black; */
+}
+
+:root {
+  --color_1: #e6c653;
+  --color_2: #25e65b;
+  --color_3: #e62525;
+  --color_4: #303fe6d5;
+  --color_5: #e63c3c;
 }

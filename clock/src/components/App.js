@@ -5,7 +5,7 @@ import "./style.css";
 function App() {
   // variables
   let doubleZero = ("0" + 0).slice(-2);
-  let countdownTime = 1000;
+  let countdownTime = 100;
 
   // states
   const [currentBreakLenght, setBreakLength] = useState(5);
@@ -19,7 +19,6 @@ function App() {
 
   const [secondId, setSecondId] = useState(null);
   const [currentDisplay, setDisplay] = useState("Session");
-  const [isSecZero, setSecZero] = useState(null);
 
   // On load values
   useEffect(() => {
