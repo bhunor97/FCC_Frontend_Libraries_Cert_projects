@@ -5,7 +5,6 @@ import "./style.css";
 function App() {
   // variables
   let doubleZero = ("0" + 0).slice(-2);
-  let countdownTime = 100;
 
   // states
   const [currentBreakLenght, setBreakLength] = useState(5);
@@ -17,7 +16,6 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [timerStarted, setTimer] = useState(false);
 
-  const [secondId, setSecondId] = useState(null);
   const [currentDisplay, setDisplay] = useState("Session");
 
   // On load values
@@ -36,7 +34,7 @@ function App() {
     setTimer(false);
     setDisplay("Session");
     // Stop
-    window.clearInterval(secondId);
+    setIsRunning(false);
   };
 
   // BREAK LENGTH
@@ -115,22 +113,18 @@ function App() {
   useEffect(() => {
     if (timerStarted) {
       setSecond(59);
-      setMinute(currentMinute - 1);
+      setMinute((currentMinute) => currentMinute - 1);
     }
   }, [timerStarted]);
 
   // Countdown useEffect
   useEffect(() => {
     if (isRunning) {
-      // Seconds;
-      const secId = window.setInterval(() => {
+      const id = window.setInterval(() => {
         setSecond((currentSecond) => currentSecond - 1);
-      }, countdownTime);
-      setSecondId(secId);
-
-      // Stop
-    } else if (isRunning === false) {
-      window.clearInterval(secondId);
+      }, 1000);
+      // Stop (cleanup function)
+      return () => window.clearInterval(id);
     }
   }, [isRunning]);
 
@@ -161,13 +155,11 @@ function App() {
     }
     if (isRunning && currentSecond < 0) {
       setSecond(59);
-      setMinute(currentMinute - 1);
+      setMinute((currentMinute) => currentMinute - 1);
     }
   }, [currentSecond]);
 
-  console.log("Minutes: " + currentMinute);
-  console.log("Seconds: " + currentMinute);
-
+  // JSX PART
   return (
     <div className="App">
       <h1>25 + 5 Clock</h1>
@@ -176,11 +168,11 @@ function App() {
         <section id="break-label">
           <h3>Break Length</h3>
           <div className="btn-display-container">
-            <button id="break-increment" onClick={decrementBreak}>
+            <button id="break-decrement" onClick={decrementBreak}>
               -break
             </button>
             <div id="break-length">{currentBreakLenght}</div>
-            <button id="break-decrement" onClick={incrementBreak}>
+            <button id="break-increment" onClick={incrementBreak}>
               +break
             </button>
           </div>
@@ -189,11 +181,11 @@ function App() {
         <section id="session-label">
           <h3>Session Length</h3>
           <div className="btn-display-container">
-            <button id="session-increment" onClick={decrementSesh}>
+            <button id="session-decrement" onClick={decrementSesh}>
               -sesh
             </button>
             <div id="session-length">{currentSeshLength}</div>
-            <button id="session-decrement" onClick={incrementSesh}>
+            <button id="session-increment" onClick={incrementSesh}>
               +sesh
             </button>
           </div>

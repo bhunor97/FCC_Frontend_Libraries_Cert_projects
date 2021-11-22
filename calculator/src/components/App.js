@@ -21,7 +21,6 @@ const App = (props) => {
       <div className="title-wrapper">
         <h1>Calculator Project</h1>
       </div>
-
       <div className="calculator-wrapper">
         {/* display */}
         <section id="display">
