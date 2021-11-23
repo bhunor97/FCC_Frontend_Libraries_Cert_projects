@@ -1,5 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import beep_2 from "../audio/beep_2.wav";
 import "./style.css";
 
 function App() {
@@ -9,14 +10,14 @@ function App() {
   // states
   const [currentBreakLenght, setBreakLength] = useState(5);
   const [currentSeshLength, setSeshLength] = useState(25);
-
   const [currentMinute, setMinute] = useState(25);
   const [currentSecond, setSecond] = useState(doubleZero);
-
   const [isRunning, setIsRunning] = useState(false);
   const [timerStarted, setTimer] = useState(false);
-
   const [currentDisplay, setDisplay] = useState("Session");
+
+  // Beep ref
+  const beepSound = useRef();
 
   // On load values
   useEffect(() => {
@@ -33,8 +34,11 @@ function App() {
     setSecond(doubleZero);
     setTimer(false);
     setDisplay("Session");
-    // Stop
+    // Running Stop
     setIsRunning(false);
+    // Audio Stop
+    beepSound.current.pause();
+    beepSound.current.load();
   };
 
   // BREAK LENGTH
@@ -103,21 +107,23 @@ function App() {
     }
   };
 
-  // Timer Started
+  // Timer Started Toggle
   let startTimer = () => {
     if (timerStarted === false) {
       setTimer(true);
     }
   };
-
+  // Timer Started 1sec delay countdown
   useEffect(() => {
     if (timerStarted) {
-      setSecond(59);
-      setMinute((currentMinute) => currentMinute - 1);
+      window.setTimeout(() => {
+        setSecond(60);
+        setMinute(currentSeshLength - 1);
+      }, 1000);
     }
   }, [timerStarted]);
 
-  // Countdown useEffect
+  // START_STOP
   useEffect(() => {
     if (isRunning) {
       const id = window.setInterval(() => {
@@ -139,10 +145,12 @@ function App() {
       setDisplay("Break");
       setMinute(currentBreakLenght);
       setSecond(doubleZero);
+      beepSound.current.play();
       if (currentDisplay === "Break") {
         setDisplay("Session");
         setMinute(currentSeshLength);
         setSecond(doubleZero);
+        beepSound.current.play();
       }
     }
   }, [currentMinute]);
@@ -158,6 +166,8 @@ function App() {
       setMinute((currentMinute) => currentMinute - 1);
     }
   }, [currentSecond]);
+
+  console.log(typeof currentSecond, currentSecond);
 
   // JSX PART
   return (
@@ -218,6 +228,8 @@ function App() {
           </button>
         </div>
       </section>
+      {/* Audio */}
+      <audio ref={beepSound} id="beep" src={beep_2}></audio>
     </div>
   );
 }
