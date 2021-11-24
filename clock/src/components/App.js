@@ -4,20 +4,19 @@ import beep_2 from "../audio/beep_2.wav";
 import "./style.css";
 
 function App() {
-  // variables
-  let doubleZero = ("0" + 0).slice(-2);
-
   // states
   const [currentBreakLenght, setBreakLength] = useState(5);
   const [currentSeshLength, setSeshLength] = useState(25);
   const [currentMinute, setMinute] = useState(25);
-  const [currentSecond, setSecond] = useState(doubleZero);
+  const [currentSecond, setSecond] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [timerStarted, setTimer] = useState(false);
   const [currentDisplay, setDisplay] = useState("Session");
+  // const [breakTime, setBreakTime] = useState(false);
 
-  // Beep ref
+  // refs
   const beepSound = useRef();
+  const displayValue = useRef();
 
   // On load values
   useEffect(() => {
@@ -31,7 +30,7 @@ function App() {
     setBreakLength(5);
     setSeshLength(25);
     setMinute(25);
-    setSecond(doubleZero);
+    setSecond(0);
     setTimer(false);
     setDisplay("Session");
     // Running Stop
@@ -113,13 +112,11 @@ function App() {
       setTimer(true);
     }
   };
-  // Timer Started 1sec delay countdown
+  // Timer Started
   useEffect(() => {
     if (timerStarted) {
-      window.setTimeout(() => {
-        setSecond(60);
-        setMinute(currentSeshLength - 1);
-      }, 1000);
+      setMinute(currentSeshLength);
+      // setSecond(0);
     }
   }, [timerStarted]);
 
@@ -134,40 +131,34 @@ function App() {
     }
   }, [isRunning]);
 
-  // Reaching 0 Minutes useEffect
+  // Reaching 0 Seconds
   useEffect(() => {
-    // min below 10
-    if (currentMinute < 10) {
-      setMinute(("0" + currentMinute).slice(-2));
-    }
-
-    if (isRunning && currentMinute < 0) {
-      setDisplay("Break");
-      setMinute(currentBreakLenght);
-      setSecond(doubleZero);
-      beepSound.current.play();
-      if (currentDisplay === "Break") {
-        setDisplay("Session");
-        setMinute(currentSeshLength);
-        setSecond(doubleZero);
-        beepSound.current.play();
-      }
-    }
-  }, [currentMinute]);
-
-  // Reaching 0 Seconds useEffect
-  useEffect(() => {
-    // sec below 10
-    if (currentSecond < 10 && currentSecond >= 0) {
-      setSecond(("0" + currentSecond).slice(-2));
-    }
-    if (isRunning && currentSecond < 0) {
+    if (isRunning && currentSecond <= 0) {
       setSecond(59);
       setMinute((currentMinute) => currentMinute - 1);
     }
   }, [currentSecond]);
 
-  console.log(typeof currentSecond, currentSecond);
+  // Reaching 0 Minutes
+  useEffect(() => {
+    if (isRunning && currentMinute < 0) {
+      setMinute(currentBreakLenght);
+      // setSecond(0);
+    }
+  }, [currentMinute, isRunning]);
+
+  useEffect(() => {
+    if (isRunning && currentMinute < 0 && currentDisplay === "Session") {
+      setDisplay("Break");
+      beepSound.current.play();
+    }
+    if (isRunning && currentMinute < 0 && currentDisplay === "Break") {
+      setDisplay("Session");
+      beepSound.current.play();
+    }
+  }, [currentMinute, currentDisplay]);
+
+  console.log(currentMinute, currentSecond, currentDisplay === "Session");
 
   // JSX PART
   return (
@@ -203,9 +194,11 @@ function App() {
       </div>
       {/* Timer Section */}
       <section>
-        <h2 id="timer-label">{currentDisplay}</h2>
-        <div id="time-left">
-          {currentMinute}:{currentSecond}
+        <div id="timer-label">{currentDisplay}</div>
+        <div id="time-left" ref={displayValue}>
+          {currentMinute < 10 ? ("0" + currentMinute).slice(-2) : currentMinute}
+          :
+          {currentSecond < 10 ? ("0" + currentSecond).slice(-2) : currentSecond}
         </div>
         <div className="btn-display-container">
           <button id="reset" onClick={resetFunc}>
