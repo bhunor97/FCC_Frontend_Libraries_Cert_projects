@@ -38,7 +38,7 @@ const Body = () => {
     // keypress
     document.addEventListener("keydown", (e) => {
       // clapOneRef
-      if (e.key === "q") {
+      if (e.key === "Q") {
         if (clapOneRef.current.paused) {
           clapOneRef.current.play();
           dispRef.current.innerText = "clap_1";
@@ -48,7 +48,7 @@ const Body = () => {
         }
       }
       // clapTwoRef
-      if (e.key === "w") {
+      if (e.key === "W") {
         if (clapTwoRef.current.paused) {
           clapTwoRef.current.play();
           dispRef.current.innerText = "clap_2";
@@ -58,7 +58,7 @@ const Body = () => {
         }
       }
       // hatOneRef
-      if (e.key === "e") {
+      if (e.key === "E") {
         if (hatOneRef.current.paused) {
           hatOneRef.current.play();
           dispRef.current.innerText = "hihat_1";
@@ -68,7 +68,7 @@ const Body = () => {
         }
       }
       // hatTwoRef
-      if (e.key === "a") {
+      if (e.key === "A") {
         if (hatTwoRef.current.paused) {
           hatTwoRef.current.play();
           dispRef.current.innerText = "hihat_2";
@@ -78,7 +78,7 @@ const Body = () => {
         }
       }
       // bassOneRef
-      if (e.key === "s") {
+      if (e.key === "S") {
         if (bassOneRef.current.paused) {
           bassOneRef.current.play();
           dispRef.current.innerText = "808";
@@ -88,7 +88,7 @@ const Body = () => {
         }
       }
       // kickOneRef
-      if (e.key === "d") {
+      if (e.key === "D") {
         if (kickOneRef.current.paused) {
           kickOneRef.current.play();
           dispRef.current.innerText = "kick_1";
@@ -98,7 +98,7 @@ const Body = () => {
         }
       }
       // kickTwoRef
-      if (e.key === "z") {
+      if (e.key === "Z") {
         if (kickTwoRef.current.paused) {
           kickTwoRef.current.play();
           dispRef.current.innerText = "kick_1";
@@ -108,7 +108,7 @@ const Body = () => {
         }
       }
       // kickThreeRef
-      if (e.key === "x") {
+      if (e.key === "X") {
         if (kickThreeRef.current.paused) {
           kickThreeRef.current.play();
           dispRef.current.innerText = "kick_3";
@@ -118,7 +118,7 @@ const Body = () => {
         }
       }
       // snareOneRef
-      if (e.key === "c") {
+      if (e.key === "C") {
         if (snareOneRef.current.paused) {
           snareOneRef.current.play();
           dispRef.current.innerText = "snare";
@@ -145,7 +145,7 @@ const Body = () => {
               min="0"
               max="100"
               id="myVolume"
-              class="volumeSlider"
+              className="volumeSlider"
               ref={volumeRef}
               onChange={volumeFunc}
             />
@@ -166,7 +166,7 @@ const Body = () => {
                 dispRef.current.innerText = "clap_1";
               }
             }}
-            onKeyPress={document}
+            // onKeyPress={document}
             className="drum-pad"
             id="clap_1"
           >
