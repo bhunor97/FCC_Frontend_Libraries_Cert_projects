@@ -38,7 +38,7 @@ const Body = () => {
     // keypress
     document.addEventListener("keydown", (e) => {
       // clapOneRef
-      if (e.key === "Q") {
+      if (e.key === "Q" || e.key === "q") {
         if (clapOneRef.current.paused) {
           clapOneRef.current.play();
           dispRef.current.innerText = "clap_1";
@@ -48,7 +48,7 @@ const Body = () => {
         }
       }
       // clapTwoRef
-      if (e.key === "W") {
+      if (e.key === "W" || e.key === "w") {
         if (clapTwoRef.current.paused) {
           clapTwoRef.current.play();
           dispRef.current.innerText = "clap_2";
@@ -58,7 +58,7 @@ const Body = () => {
         }
       }
       // hatOneRef
-      if (e.key === "E") {
+      if (e.key === "E" || e.key === "e") {
         if (hatOneRef.current.paused) {
           hatOneRef.current.play();
           dispRef.current.innerText = "hihat_1";
@@ -68,7 +68,7 @@ const Body = () => {
         }
       }
       // hatTwoRef
-      if (e.key === "A") {
+      if (e.key === "A" || e.key === "a") {
         if (hatTwoRef.current.paused) {
           hatTwoRef.current.play();
           dispRef.current.innerText = "hihat_2";
@@ -78,7 +78,7 @@ const Body = () => {
         }
       }
       // bassOneRef
-      if (e.key === "S") {
+      if (e.key === "S" || e.key === "s") {
         if (bassOneRef.current.paused) {
           bassOneRef.current.play();
           dispRef.current.innerText = "808";
@@ -88,7 +88,7 @@ const Body = () => {
         }
       }
       // kickOneRef
-      if (e.key === "D") {
+      if (e.key === "D" || e.key === "d") {
         if (kickOneRef.current.paused) {
           kickOneRef.current.play();
           dispRef.current.innerText = "kick_1";
@@ -98,7 +98,7 @@ const Body = () => {
         }
       }
       // kickTwoRef
-      if (e.key === "Z") {
+      if (e.key === "Z" || e.key === "z") {
         if (kickTwoRef.current.paused) {
           kickTwoRef.current.play();
           dispRef.current.innerText = "kick_1";
@@ -108,7 +108,7 @@ const Body = () => {
         }
       }
       // kickThreeRef
-      if (e.key === "X") {
+      if (e.key === "X" || e.key === "x") {
         if (kickThreeRef.current.paused) {
           kickThreeRef.current.play();
           dispRef.current.innerText = "kick_3";
@@ -118,7 +118,7 @@ const Body = () => {
         }
       }
       // snareOneRef
-      if (e.key === "C") {
+      if (e.key === "C" || e.key === "c") {
         if (snareOneRef.current.paused) {
           snareOneRef.current.play();
           dispRef.current.innerText = "snare";
