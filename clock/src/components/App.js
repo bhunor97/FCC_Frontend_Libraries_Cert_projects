@@ -163,18 +163,20 @@ function App() {
   // JSX PART
   return (
     <div className="App">
-      <h1>25 + 5 Clock</h1>
+      <div className="title-div">
+        <h1>25 + 5 Clock</h1>
+      </div>
       <div className="break-session-container">
         {/* Break Length Section */}
         <section id="break-label">
           <h3>Break Length</h3>
           <div className="btn-display-container">
             <button id="break-decrement" onClick={decrementBreak}>
-              -break
+              -
             </button>
             <div id="break-length">{currentBreakLenght}</div>
             <button id="break-increment" onClick={incrementBreak}>
-              +break
+              +
             </button>
           </div>
         </section>
@@ -183,11 +185,11 @@ function App() {
           <h3>Session Length</h3>
           <div className="btn-display-container">
             <button id="session-decrement" onClick={decrementSesh}>
-              -sesh
+              -
             </button>
             <div id="session-length">{currentSeshLength}</div>
             <button id="session-increment" onClick={incrementSesh}>
-              +sesh
+              +
             </button>
           </div>
         </section>
@@ -201,24 +203,44 @@ function App() {
           {currentSecond < 10 ? ("0" + currentSecond).slice(-2) : currentSecond}
         </div>
         <div className="btn-display-container">
-          <button id="reset" onClick={resetFunc}>
-            reset-btn
+          <button id="reset" className="reset" onClick={resetFunc}>
+            reset
           </button>
-          <button
-            id="start_stop"
-            onClick={() => {
-              // isRunning toggle
-              if (isRunning === true) {
-                setIsRunning(false);
-              } else if (isRunning === false) {
-                setIsRunning(true);
-              }
-              // startTimer function call
-              startTimer();
-            }}
-          >
-            start-stop-btn
-          </button>
+          {isRunning ? (
+            <button
+              id="start_stop"
+              className="start-stop-start"
+              onClick={() => {
+                // isRunning toggle
+                if (isRunning === true) {
+                  setIsRunning(false);
+                } else if (isRunning === false) {
+                  setIsRunning(true);
+                }
+                // startTimer function call
+                startTimer();
+              }}
+            >
+              {!isRunning ? "start" : "stop"}
+            </button>
+          ) : (
+            <button
+              id="start_stop"
+              className="start-stop-stop"
+              onClick={() => {
+                // isRunning toggle
+                if (isRunning === true) {
+                  setIsRunning(false);
+                } else if (isRunning === false) {
+                  setIsRunning(true);
+                }
+                // startTimer function call
+                startTimer();
+              }}
+            >
+              {!isRunning ? "start" : "stop"}
+            </button>
+          )}
         </div>
       </section>
       {/* Audio */}
